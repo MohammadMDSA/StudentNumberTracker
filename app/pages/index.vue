@@ -1,34 +1,85 @@
 <template>
-  <f7-page>
-    <f7-navbar title="Nuxt7 Project">
-      <f7-nav-right>
-        <a class="link icon-only searchbar-enable" data-searchbar=".searchbar-components">
-          <i class="icon f7-icons ios-only">search_strong</i>
-          <i class="icon material-icons md-only">search</i>
-        </a>
-      </f7-nav-right>
-      <form data-search-container=".components-list" data-search-in="a" class="searchbar searchbar-expandable searchbar-components searchbar-init">
-        <div class="searchbar-inner">
-          <div class="searchbar-input-wrap">
-            <input type="search" placeholder="Search components"/>
-            <i class="searchbar-icon"></i>
-            <span class="input-clear-button"></span>
-          </div>
-          <span class="searchbar-disable-button">Cancel</span>
-        </div>
-      </form>
-    </f7-navbar>
+	<f7-page>
+		<f7-navbar back-link="Back" title="Contacts" sliding></f7-navbar>
 
-    <f7-block-title class="searchbar-found">About</f7-block-title>
-
-    <f7-list class="searchbar-hide-on-search">
-      <f7-list-item title="About Nuxt7" link="/about/"></f7-list-item>
-    </f7-list>
-  </f7-page>
+		<f7-list contacts>
+			<f7-list-group v-for="(group, index) in contacts" :key="index">
+				<f7-list-item :title="index" group-title></f7-list-item>
+				<f7-list-item v-for="contact in group" :key="contact.name" :title="name"></f7-list-item>
+			</f7-list-group>
+		</f7-list>
+		<!-- <f7-fab color="red">
+			<f7-icon if-ios="f7:add" if-material="material:add"></f7-icon>
+		</f7-fab> -->
+	</f7-page>
 </template>
 
 <script>
-export default {
+import Router from ''
 
-}
+export default {
+	data() {
+		return {
+			contacts: {
+				'$': [],
+				'A': [],
+				'B': [],
+				'C': [],
+				'D': [],
+				'E': [],
+				'F': [],
+				'G': [],
+				'H': [],
+				'I': [],
+				'J': [],
+				'K': [],
+				'L': [],
+				'M': [],
+				'N': [],
+				'o': [],
+				'P': [],
+				'Q': [],
+				'R': [],
+				'S': [],
+				'T': [],
+				'U': [],
+				'V': [],
+				'W': [],
+				'X': [],
+				'Y': [],
+				'X': [],
+			}
+		}
+	},
+	methods: {
+		async refresh() {
+			const all = await this.$axios.$get();
+			console.log(all);
+			all.forEach((item) => {
+				let name;
+				let unknown = false;
+				if(item.lastName !== undefined)
+					name = item.lastName;
+				else if(item.firstName != undefined)
+					name = item.firstName;
+				else {
+					name = 'Unknown'
+					
+					unknown = true;
+				}
+				if(unknown)
+					this.contacts.$.push(item);
+				else {
+					var k = name.charAt(0).toUpperCase();
+					this.contacts[k].push(item);
+				}
+
+			});
+		}
+	}
+};
 </script>
+
+<style>
+
+</style>

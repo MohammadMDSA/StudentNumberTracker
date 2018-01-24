@@ -20,10 +20,8 @@ module.exports = {
 
   // Framework7 Config
   framework7: {
-    css: true,
     f7Icons: false,
     mdIcons: false,
-    pwa: true
   },
 
   // Build configuration
