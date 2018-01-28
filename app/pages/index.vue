@@ -5,11 +5,21 @@
 		<f7-list contacts>
 			<f7-list-group>
 				<f7-list-item title="All" group-title></f7-list-item>
-				<f7-list-item v-for="(contact, index) in allContacts" :key="contact._id" :title="contact.lastName" @swipeout:delete="swipeDelete(index)" swipeout>
-					<f7-swipeout-actions>
-						<f7-swipeout-button delete>Delete</f7-swipeout-button>
-					</f7-swipeout-actions>
-				</f7-list-item>
+				
+				<transition-group name="list-change" mode="in-out">
+
+
+					<f7-list-item class="slow-move" v-for="(contact, index) in allContacts" :key="contact._id" :title="contact.lastName" swipeout>
+						<f7-swipeout-actions>
+							<f7-swipeout-button @click="swipeDelete(index)" class="delete-swipeout" delete>Delete</f7-swipeout-button>
+						</f7-swipeout-actions>
+					</f7-list-item>
+
+
+
+				</transition-group>
+
+
 			</f7-list-group>
 		</f7-list>
 		<f7-fab color="red" @click="gotoAbout">
@@ -33,14 +43,16 @@ export default {
 		gotoAbout() {
 			this.$f7router.navigate('/addContact');
 		},
-		swipeDelete(index) {
+		async swipeDelete(index) {
 			console.log(this.allContacts[index]);
-			this.$axios.$post('contact', {
+			let result = await this.$axios.$post('contact', {
 				action: 'remove',
 				data: {
 					userName: this.allContacts[index].userName
 				}
-			})
+			});
+			if(result.ok === 1)
+				this.allContacts.splice(index, 1);
 		}
 	},
 	mounted() {
@@ -51,5 +63,31 @@ export default {
 </script>
 
 <style>
+.delete-swipeout {
+	background: red;
+}
 
+.slow-move {
+	transition: all 0.5s ease-out;
+}
+
+.list-change-item {
+  transition: all 0.5s;
+  display: inline-block;
+}
+.list-change-enter,
+.list-change-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.list-change-enter-active {
+  position: relative;
+}
+.list-change-leave-active {
+  position: absolute;
+}
+.list-change-enter-to,
+.list-change-leave {
+  opacity: 1;
+}
 </style>

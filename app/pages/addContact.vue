@@ -35,7 +35,6 @@
 						<input readonly="readonly" type="text" placeholder="Select date" id="calendar-modal">
 					</div>
 				</div>
-				<span>{{dateOfBirth}}</span>
 			</f7-list-item>
 			<f7-list-item>
 				<div class="item-input-wrap">
@@ -60,6 +59,8 @@
 </template>
 
 <script>
+import index from './index'
+
 export default {
 	data() {
 		return {
@@ -72,18 +73,11 @@ export default {
 	},
 	methods: {
 		async submit() {
-			console.log('hey!')
-			console.log(this.firstName)
 			if(!this.firstName || this.firstName === '') return;
-			console.log(this.lastName)
 			if(!this.lastName || this.lastName === '') return;
-			console.log(this.dateOfBirth)
 			if(!this.dateOfBirth || this.dateOfBirth === '') return;
-			console.log(this.username)
 			if(!this.username || this.username === '') return;
-			console.log(this.note)
 			if(!this.note || this.note === '') return;
-			console.log('sdfdf')
 
 			let result = await this.$axios.$post("contact", {
 				action: 'add',
@@ -95,7 +89,10 @@ export default {
 					note: this.note
 				}
 			});
-			console.log('after')
+			if(result.created_at) {
+				index.refresh();
+				this.$f7router.back();
+			}
 		}
 	},
 	on: {
