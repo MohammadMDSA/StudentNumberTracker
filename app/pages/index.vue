@@ -5,7 +5,11 @@
 		<f7-list contacts>
 			<f7-list-group>
 				<f7-list-item title="All" group-title></f7-list-item>
-				<f7-list-item v-for="contact in allContacts" :key="contact._id" :title="contact.lastName"></f7-list-item>
+				<f7-list-item v-for="(contact, index) in allContacts" :key="contact._id" :title="contact.lastName" @swipeout:delete="swipeDelete(index)" swipeout>
+					<f7-swipeout-actions>
+						<f7-swipeout-button delete>Delete</f7-swipeout-button>
+					</f7-swipeout-actions>
+				</f7-list-item>
 			</f7-list-group>
 		</f7-list>
 		<f7-fab color="red" @click="gotoAbout">
@@ -28,6 +32,15 @@ export default {
 		},
 		gotoAbout() {
 			this.$f7router.navigate('/addContact');
+		},
+		swipeDelete(index) {
+			console.log(this.allContacts[index]);
+			this.$axios.$post('contact', {
+				action: 'remove',
+				data: {
+					userName: this.allContacts[index].userName
+				}
+			})
 		}
 	},
 	mounted() {

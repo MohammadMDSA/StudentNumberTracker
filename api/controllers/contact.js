@@ -10,23 +10,20 @@ class ContactController extends Controller {
 
 	async contactGet() {
 		const all = await Contact.find({});
-		console.log(all);
 		return all;
 	}
 
 	async contactPost(req, res) {
-		console.log('inside');
 		let payload = req.payload;
-		console.log(payload.data)
 		if(payload.action === 'add') {
 			let c = new Contact(payload.data);
 			let result = await c.save();
-			console.log(result);
-			if(result.ok === 1) return true;
-			return false;
+			// TODO something not right here
+			return result;
 		}
 		else {
-
+			let result = await Contact.remove(payload.data)
+			return result;
 		}
 	}
 }
