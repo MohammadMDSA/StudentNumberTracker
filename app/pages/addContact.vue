@@ -1,34 +1,56 @@
 <template>
 	<f7-page>
-		<f7-navbar back-link="Cancel" title="New Contact" sliding></f7-navbar>
+		<f7-navbar back-link="Cancel" title="New Contact">
+			<f7-nav-right sliding>
+				<f7-link @click="submit">Save</f7-link>
+			</f7-nav-right>
+		</f7-navbar>
 		<f7-block>
 			<f7-row>
 				<f7-col width="25">
 					<img class="img-fluid" src="../static/user-icon-placeholder.png">
 				</f7-col>
 				<f7-col width="75">
-					<f7-list class="top" no-hairlines-md>
+					<f7-list class="top" no-hairlines-md inset>
 						<f7-list-item>
-							<f7-input type="text" placeholder="First name" required clear-button/>
+							<div class="item-input-wrap">
+								<input type="text" v-model="firstName" placeholder="First name" clear-button/>
+							</div>
 						</f7-list-item>
 						<f7-list-item>
-							<f7-input type="text" placeholder="Last name" required clear-button/>
+							<div class="item-input-wrap">
+								<input type="text" v-model="lastName" placeholder="Last name" clear-button/>
+							</div>
 						</f7-list-item>
 					</f7-list>
 				</f7-col>
 			</f7-row>
-			<f7-list class="top">
-				<f7-list-item>
-					<input type="text" v-model="dateOfBirt" placeholder="Select date" readonly="readonly" id="calendar-modal">
-				</f7-list-item>
-				<f7-list-item>
-					<f7-input type="text" placeholder="Username" required clear-button/>
-				</f7-list-item>
-				<f7-list-item>
-					<f7-input type="textarea" placeholder="Note" required clear-button/>
-				</f7-list-item>
-			</f7-list>
 		</f7-block>
+		<f7-list class="top" inset>
+			<f7-list-item>
+				<div class="item-input-wrap">
+					<div class="item-input-wrap">
+						<input type="text" v-model="dateOfBirth" placeholder="Select date" readonly id="calendar-modal">
+					</div>
+				</div>
+			</f7-list-item>
+			<f7-list-item>
+				<div class="item-input-wrap">
+					<div class="item-input-wrap">
+						<input type="text" v-model="username" placeholder="Username">
+						<span class="input-clear-button"></span>
+					</div>
+					
+				</div>
+			</f7-list-item>
+			<f7-list-item>
+				<div class="item-input-wrap">
+					<div class="item-input-wrap">
+						<textarea class="input-with-value" type="textarea" v-model="note" placeholder="Note" clear-button/>
+					</div>
+				</div>
+			</f7-list-item>
+		</f7-list>
 	</f7-page>
 
 </template>
@@ -37,11 +59,39 @@
 export default {
 	data() {
 		return {
-			firstName: '',
-			lastName: '',
-			dateOfBirt: '',
-			username: '',
-			node: '',
+			firstName: 'dsf',
+			lastName: 'lhjkgjfhjk',
+			dateOfBirth: 'lhjkgjfhjk',
+			username: 'lhjkgjfhjk',
+			note: 'lhjkgjfhjk',
+		}
+	},
+	methods: {
+		async submit() {
+			console.log('hey!')
+			console.log(this.firstName)
+			if(!this.firstName || this.firstName === '') return;
+			console.log(this.lastName)
+			if(!this.lastName || this.lastName === '') return;
+			console.log(this.dateOfBirth)
+			if(!this.dateOfBirth || this.dateOfBirth === '') return;
+			console.log(this.username)
+			if(!this.username || this.username === '') return;
+			console.log(this.note)
+			if(!this.note || this.note === '') return;
+			console.log('sdfdf')
+
+			let result = await this.$axios.$post("contact", {
+				action: 'add',
+				data: {
+					firstName: this.firstName,
+					lastName: this.lastName,
+					dateOfBirth: this.dateOfBirth,
+					userName: this.username,
+					note: this.note
+				}
+			});
+			console.log('after')
 		}
 	},
 	on: {

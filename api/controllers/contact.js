@@ -14,7 +14,19 @@ class ContactController extends Controller {
 	}
 
 	async contactPost(req, res) {
-	
+		console.log('inside');
+		let payload = req.payload;
+		console.log(payload.data)
+		if(payload.action === 'add') {
+			let c = new Contact(payload.data);
+			let result = await c.save();
+			console.log(result);
+			if(result.ok === 1) return true;
+			return false;
+		}
+		else {
+
+		}
 	}
 }
 

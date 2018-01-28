@@ -11,3 +11,5 @@ class Contact extends Model {
 		}
 	}
 }
+
+module.exports = Contact.$model;
