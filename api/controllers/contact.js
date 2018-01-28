@@ -28,4 +28,4 @@ class ContactController extends Controller {
 	}
 }
 
-module.exports = ContactController
+module.exports = ContactController;

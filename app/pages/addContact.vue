@@ -90,8 +90,7 @@ export default {
 				}
 			});
 			if(result.created_at) {
-				index.refresh();
-				this.$f7router.back();
+				this.$f7router.navigate('/index');
 			}
 		}
 	},
