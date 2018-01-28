@@ -5,7 +5,7 @@
 		<f7-list contacts>
 			<f7-list-group>
 				<f7-list-item title="All" group-title></f7-list-item>
-				<f7-list-item v-for="contact in allContacts" :key="contact.name" :title="name"></f7-list-item>
+				<f7-list-item v-for="contact in allContacts" :key="contact._id" :title="contact.lastName"></f7-list-item>
 			</f7-list-group>
 		</f7-list>
 		<f7-fab color="red" @click="gotoAbout">
@@ -24,12 +24,16 @@ export default {
 	},
 	methods: {
 		async refresh() {
-			this.allContacts = await this.$axios.$get();
+			this.allContacts = await this.$axios.$get('contact');
 		},
 		gotoAbout() {
 			this.$f7router.navigate('/addContact');
 		}
+	},
+	mounted() {
+		this.refresh();
 	}
+	
 };
 </script>
 

@@ -9,7 +9,8 @@ class ContactController extends Controller {
 	}
 
 	async contactGet() {
-		const all = await Contact.find({})
+		const all = await Contact.find({});
+		console.log(all);
 		return all;
 	}
 

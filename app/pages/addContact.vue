@@ -14,12 +14,14 @@
 					<f7-list class="top" no-hairlines-md inset>
 						<f7-list-item>
 							<div class="item-input-wrap">
-								<input type="text" v-model="firstName" placeholder="First name" clear-button/>
+								<input type="text" v-model="firstName" placeholder="First name"/>
+								<span class="input-clear-button"></span>
 							</div>
 						</f7-list-item>
 						<f7-list-item>
 							<div class="item-input-wrap">
-								<input type="text" v-model="lastName" placeholder="Last name" clear-button/>
+								<input type="text" v-model="lastName" placeholder="Last name"/>
+								<span class="input-clear-button"></span>
 							</div>
 						</f7-list-item>
 					</f7-list>
@@ -30,9 +32,10 @@
 			<f7-list-item>
 				<div class="item-input-wrap">
 					<div class="item-input-wrap">
-						<input type="text" v-model="dateOfBirth" placeholder="Select date" readonly id="calendar-modal">
+						<input readonly="readonly" type="text" placeholder="Select date" id="calendar-modal">
 					</div>
 				</div>
+				<span>{{dateOfBirth}}</span>
 			</f7-list-item>
 			<f7-list-item>
 				<div class="item-input-wrap">
@@ -46,7 +49,8 @@
 			<f7-list-item>
 				<div class="item-input-wrap">
 					<div class="item-input-wrap">
-						<textarea class="input-with-value" type="textarea" v-model="note" placeholder="Note" clear-button/>
+						<textarea class="input-with-value" type="textarea" v-model="note" placeholder="Note"/>
+						<span class="input-clear-button"></span>
 					</div>
 				</div>
 			</f7-list-item>
@@ -59,11 +63,11 @@
 export default {
 	data() {
 		return {
-			firstName: 'dsf',
-			lastName: 'lhjkgjfhjk',
-			dateOfBirth: 'lhjkgjfhjk',
-			username: 'lhjkgjfhjk',
-			note: 'lhjkgjfhjk',
+			firstName: '',
+			lastName: '',
+			dateOfBirth: '',
+			username: '',
+			note: '',
 		}
 	},
 	methods: {
@@ -101,11 +105,14 @@ export default {
 				openIn: "customModal",
 				header: true,
 				footer: true,
-				dateFormat: "MM dd yyyy"
+				dateFormat: 'd MM, yyyy'
 			});
+			this.calendarModal.on('close', () => {
+				this.dateOfBirth = this.calendarModal.getValue()[0];
+			})
 		}
 	},
-	pagetBeforeRemove() {
+	pageBeforeRemove() {
 		this.calendarModal.destroy();
 	}
 };

@@ -5,7 +5,7 @@ class Contact extends Model {
 		return {
 			firstName: {type: Schema.Types.String},
 			lastName: {type: Schema.Types.String},
-			dateOfBirth: {type: Schema.Types.String},
+			dateOfBirth: {type: Schema.Types.Date},
 			userName: {type: Schema.Types.String},
 			note: {type: Schema.Types.String}
 		}
