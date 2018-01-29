@@ -30,11 +30,9 @@
 		</f7-fab>
 		<f7-popover ref="popMenuElement" class="popover-menu">
 			<f7-list>
-				<f7-list-item link="/dialog/" popover-close title="Dialog"></f7-list-item>
-				<f7-list-item link="/tabs/" popover-close title="Tabs"></f7-list-item>
-				<f7-list-item link="/panel/" popover-close title="Side Panels"></f7-list-item>
-				<f7-list-item link="/list/" popover-close title="List View"></f7-list-item>
-				<f7-list-item link="/inputs/" popover-close title="Form Inputs"></f7-list-item>
+				<f7-list-item link="#" popover-close title="Detail"></f7-list-item>
+				<f7-list-item link="#" popover-close title="Edit"></f7-list-item>
+				<f7-list-item link="#" popover-close title="Delete Panels"></f7-list-item>
 			</f7-list>
 		</f7-popover>
 	</f7-page>
