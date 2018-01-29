@@ -1,11 +1,11 @@
 <template>
-	<f7-page>
+	<f7-page ptr @ptr:refresh="refresh">
 		<f7-navbar title="Contacts" sliding>
 			<f7-nav-right>
 				<f7-link @click="sorting = !sorting" sortable-toggle=".sortable">{{sorting ? "Done" : "Edit"}}</f7-link>
 			</f7-nav-right>
 		</f7-navbar>
-		<span>{{sorting}}</span>
+
 		<f7-list contacts sortable>
 			<f7-list-item title="All" group-title></f7-list-item>
 			
@@ -22,7 +22,7 @@
 
 
 
-		</transition-group>
+		<!--</transition-group>-->
 
 		</f7-list>
 		<f7-fab color="skyblue" @click="gotoAddContact">
@@ -50,8 +50,9 @@ export default {
 		}
 	},
 	methods: {
-		async refresh() {
+		async refresh(event, done) {
 			this.allContacts = await this.$axios.$get('contact');
+			if(done) done();
 		},
 		gotoAddContact() {
 			this.$f7router.navigate('/addContact');
