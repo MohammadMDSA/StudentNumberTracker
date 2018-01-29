@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import index from './index'
-
 export default {
 	data() {
 		return {
@@ -90,7 +88,7 @@ export default {
 				}
 			});
 			if(result.created_at) {
-				this.$f7router.navigate('/index');
+				this.$f7router.back();
 			}
 		}
 	},
@@ -110,6 +108,8 @@ export default {
 	},
 	pageBeforeRemove() {
 		this.calendarModal.destroy();
+	},
+	mounted() {
 	}
 };
 </script>

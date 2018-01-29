@@ -1,5 +1,5 @@
 <template>
-	<f7-page ptr @ptr:refresh="refresh">
+	<f7-page ptr @ptr:refresh="refresh" @page:beforein="refresh()">
 		<f7-navbar title="Contacts" sliding>
 			<f7-nav-right>
 				<f7-link @click="sorting = !sorting" sortable-toggle=".sortable">{{sorting ? "Done" : "Edit"}}</f7-link>
@@ -58,7 +58,6 @@ export default {
 			this.$f7router.navigate('/addContact');
 		},
 		async swipeDelete(index) {
-			console.log(this.allContacts[index]);
 			let result = await this.$axios.$post('contact', {
 				action: 'remove',
 				data: {
@@ -69,9 +68,6 @@ export default {
 		openPopOver(element) {
 			this.$refs.popMenuElement.open(element);
 		}
-	},
-	mounted() {
-		this.refresh();
 	},
 	components: {
 		f7Popover
