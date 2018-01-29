@@ -11,17 +11,18 @@ module.exports = {
   srcDir: __dirname,
   buildDir: resolve(__dirname, '.nuxt'),
 
-  // PWA manifest
-  // https://github.com/nuxt-community/pwa-module
   manifest: {
-    name: 'app2',
-    description: 'My PWA App'
+    name: 'Contact Book',
+    description: 'My Contact Book'
   },
 
   // Framework7 Config
   framework7: {
     f7Icons: false,
     mdIcons: false,
+    touch: {
+      tapHold: true,
+    }
   },
 
   // Build configuration
@@ -38,6 +39,7 @@ module.exports = {
   // Additional CSS configuration
   css: [
     'assets/app.css',
+    'assets/style.css',
   ],
 
 

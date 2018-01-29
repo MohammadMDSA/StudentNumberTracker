@@ -2691,9 +2691,9 @@ framework7-icons@^0.8.9:
   version "0.8.9"
   resolved "https://registry.yarnpkg.com/framework7-icons/-/framework7-icons-0.8.9.tgz#af94a6051be659f3f7b9d873fba6040c8fe72769"
 
-framework7-vue@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/framework7-vue/-/framework7-vue-2.0.0.tgz#86db489fa7291d9d25a47040920cfd4d362186c7"
+framework7-vue@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/framework7-vue/-/framework7-vue-2.0.7.tgz#d52a3cd449a8e314f1b85c237530ea6b2bbc2ba9"
 
 framework7@^2.0.6:
   version "2.0.6"
@@ -2702,6 +2702,14 @@ framework7@^2.0.6:
     dom7 "^2.0.1"
     path-to-regexp "^2.1.0"
     template7 "^1.3.1"
+
+framework7@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/framework7/-/framework7-2.0.7.tgz#bcd8ae26a58fcdd8db82694747fc8a5162968001"
+  dependencies:
+    dom7 "^2.0.1"
+    path-to-regexp "^2.1.0"
+    template7 "^1.3.5"
 
 fresh@0.5.2, fresh@^0.5.2:
   version "0.5.2"
@@ -4518,13 +4526,13 @@ number-is-nan@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
 
-nuxt7@latest:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/nuxt7/-/nuxt7-1.0.0.tgz#726b1038fbd4f6a24611417fea068c2de3c74630"
+nuxt7@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/nuxt7/-/nuxt7-1.1.0.tgz#1707da7cebc810a5dea83289ff73943406decda0"
   dependencies:
     "@nuxtjs/pwa" "^2.0.5"
-    framework7 "^2.0.6"
-    framework7-vue "^2.0.0"
+    framework7 "^2.0.7"
+    framework7-vue "^2.0.7"
     less "^2.7.3"
     less-loader "^4.0.5"
     lodash "^4.17.4"
@@ -6646,6 +6654,10 @@ teamwork@3.x.x:
 template7@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/template7/-/template7-1.3.1.tgz#f01eedf72665f37d9f4db737b4025663d9d39916"
+
+template7@^1.3.5:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/template7/-/template7-1.3.5.tgz#8dac198b628313b0e53b22487e29d904e0455828"
 
 through2@^2.0.0:
   version "2.0.3"

@@ -1,35 +1,34 @@
 <template>
 	<f7-page>
-		<f7-navbar back-link="Back" title="Contacts" sliding></f7-navbar>
-
-		<f7-list contacts>
-			<f7-list-group>
-				<f7-list-item title="All" group-title></f7-list-item>
-				
-				<transition-group name="list-change" mode="in-out">
-
-
-					<f7-list-item class="slow-move" v-for="(contact, index) in allContacts" :key="contact" :title="contact.lastName" swipeout>
-						<f7-swipeout-actions>
-							<f7-swipeout-button @click="swipeDelete(index)" class="delete-swipeout" style="background: red">Delete</f7-swipeout-button>
-						</f7-swipeout-actions>
-					</f7-list-item>
+		<f7-navbar title="Contacts" sliding>
+			<f7-nav-right>
+				<f7-link @click="sorting = !sorting" sortable-toggle=".sortable">{{sorting ? "Done" : "Edit"}}</f7-link>
+			</f7-nav-right>
+		</f7-navbar>
+		<span>{{sorting}}</span>
+		<f7-list contacts sortable>
+			<f7-list-item title="All" group-title></f7-list-item>
+			
+			<!--<transition-group name="list-change" mode="in-out">-->
 
 
+				<f7-list-item class="slow-move" href="#" @swipeout="sorting = false" @taphold="gotoAddContact" v-for="(contact, index) in allContacts" :key="contact.userName" :title="contact.lastName" :swipeout="!sorting">
+					<f7-swipeout-actions v-if="!sorting">
+						<f7-swipeout-button @click="openPopOver($event.srcElement)">More</f7-swipeout-button>
+						<f7-swipeout-button delete @click="swipeDelete(index)" class="delete-swipeout" style="background: red">Delete</f7-swipeout-button>
+					</f7-swipeout-actions>
+				</f7-list-item>
 
 
-				</transition-group>
 
 
-			</f7-list-group>
+		</transition-group>
+
 		</f7-list>
-		<f7-fab color="red" @click="gotoAddContact">
+		<f7-fab color="skyblue" @click="gotoAddContact">
 			<f7-icon if-ios="f7:add" if-material="material:add"></f7-icon>
 		</f7-fab>
-
-
-
-		<f7-popover class="popover-menu">
+		<f7-popover ref="popMenuElement" class="popover-menu">
 			<f7-list>
 				<f7-list-item link="/dialog/" popover-close title="Dialog"></f7-list-item>
 				<f7-list-item link="/tabs/" popover-close title="Tabs"></f7-list-item>
@@ -42,24 +41,14 @@
 </template>
 
 <script>
+import {f7Popover} from 'framework7-vue'
+
 
 export default {
 	data() {
 		return {
-			allContacts: [
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-				{lastName: "sfsdfsd"},
-			],
+			allContacts: [],
+			sorting: false,
 		}
 	},
 	methods: {
@@ -77,23 +66,32 @@ export default {
 					userName: this.allContacts[index].userName
 				}
 			});
-			if(result.ok === 1);
-				this.allContacts.splice(index, 1);
+		},
+		openPopOver(element) {
+			this.$refs.popMenuElement.open(element);
 		}
 	},
 	mounted() {
-		// this.refresh();
+		this.refresh();
+	},
+	components: {
+		f7Popover
 	}
-	
 };
 </script>
 
-<style>
+<style scoped>
 .slow-move {
-	transition: all 0.5s ease-out;
+	transition: all 0.1s ease-out;
 }
 
 .list-change-move {
-	transition: all 0.5s ease-out;
+	transition: all 0.1s ease-out;
 }
+
+.fill-container {
+	max-width: 100%;
+	position: relative;
+}
+
 </style>
