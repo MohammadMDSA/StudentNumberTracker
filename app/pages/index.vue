@@ -6,23 +6,20 @@
 			</f7-nav-right>
 		</f7-navbar>
 
-		<f7-list contacts sortable>
-			<f7-list-item title="All" group-title></f7-list-item>
+		<f7-list contacts-list>
 			
-			<!--<transition-group name="list-change" mode="in-out">-->
-
-
-				<f7-list-item class="slow-move" href="#" @swipeout="sorting = false" @taphold="gotoAddContact" v-for="(contact, index) in allContacts" :key="contact.userName" :title="contact.lastName" :swipeout="!sorting">
+			<f7-list-group v-for="(group, key) in allContacts" :key="key">
+				<f7-list-item :title="key" group-title></f7-list-item>
+				<f7-list-item class="slow-move" href="#" @swipeout="sorting = false" @taphold="gotoAddContact" v-for="(contact, index) in group" :key="contact.userName" :title="contact.lastName" :swipeout="!sorting">
 					<f7-swipeout-actions v-if="!sorting">
 						<f7-swipeout-button @click="openPopOver($event.srcElement)">More</f7-swipeout-button>
 						<f7-swipeout-button delete @click="swipeDelete(index)" class="delete-swipeout" style="background: red">Delete</f7-swipeout-button>
 					</f7-swipeout-actions>
 				</f7-list-item>
+			</f7-list-group>
 
+				
 
-
-
-		<!--</transition-group>-->
 
 		</f7-list>
 		<f7-fab color="skyblue" @click="gotoAddContact">

@@ -10,7 +10,64 @@ class ContactController extends Controller {
 
 	async contactGet() {
 		const all = await Contact.find({});
-		return all;
+		
+		let cat = {
+			'#': [],
+			A: [],
+			B: [],
+			C: [],
+			D: [],
+			E: [],
+			F: [],
+			G: [],
+			H: [],
+			I: [],
+			J: [],
+			K: [],
+			L: [],
+			M: [],
+			N: [],
+			O: [],
+			P: [],
+			Q: [],
+			R: [],
+			S: [],
+			T: [],
+			U: [],
+			V: [],
+			W: [],
+			X: [],
+			Y: [],
+			Z: []
+		}
+
+		all.forEach((item) => {
+			let gp = item.lastName.charAt(0);
+			if(gp.match(/[a-z]/i)) {
+				cat[gp.toUpperCase()].push(item);
+			}
+			else {
+				cat['#'].push(item);
+			}
+		});
+
+		
+		Object.keys(cat).forEach((item) => {
+			cat[item].sort((a, b) => (a.lastName.toLowerCase() > b.lastName.toLowerCase()) ? 1 : -1);
+		});
+		
+		console.log(cat);
+
+
+
+
+
+
+
+
+
+
+		return cat;
 	}
 
 	async contactPost(req, res) {
